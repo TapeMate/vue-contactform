@@ -79,10 +79,14 @@ export default {
   margin-right: 15px;
 }
 .form-entry-info {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.6);
   padding: 1rem 0;
   margin-bottom: 30px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+}
+.form-entry-info p,
+.form-entry-info h3 {
+  padding: 1rem;
 }
 .form-container {
   /* width: 100%; */
@@ -95,11 +99,16 @@ export default {
 }
 
 input,
-label,
-textarea {
-  width: 100%;
+label {
   width: 100%;
   display: inline-block;
+  padding: 0.5rem;
+}
+
+textarea {
+  width: 80%;
+  display: inline-block;
+  padding: 1rem;
 }
 .input-container label {
   text-align: right;
@@ -119,7 +128,6 @@ input,
 textarea,
 label {
   border: none;
-  padding: 0.5rem;
   margin: 3px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   outline: none;
