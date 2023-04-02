@@ -1,15 +1,5 @@
 <template>
   <div class="form-container">
-    <!-- <div class="form-entry-info">
-      <h3>contact title</h3>
-      <p>
-        *Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eum
-        similique omnis molestias temporibus voluptates distinctio nesciunt
-        perferendis assumenda maxime, rem quas. Similique, nemo non? Unde quod
-        eligendi distinctio ea.
-      </p>
-    </div> -->
-
     <form @submit="onSubmit">
       <div class="input-control">
         <label for="contact-topic">Topic</label>
@@ -21,49 +11,16 @@
           placeholder="Type in your topic here..."
         />
       </div>
-      <!-- <div class="input-control">
-        <label for="contact-textarea">Description</label
-        ><textarea
-          name=""
-          id="contact-textarea"
-          cols="30"
-          rows="10"
-          class="contact-textarea"
-        ></textarea>
+      <div class="input-control">
+        <label for="contact-description">Description</label>
+        <input
+          type="text"
+          v-model="description"
+          name="description"
+          id="contact-description"
+          placeholder="Type in your topic here..."
+        />
       </div>
-
-      <div class="input-container">
-        <div class="input-control">
-          <label for="first-name">First Name</label>
-          <input type="text" name="" id="first-name" />
-        </div>
-        <div class="input-control">
-          <label for="last-name">Last Name</label>
-          <input type="text" name="" id="last-name" />
-        </div>
-      </div>
-
-      <div class="input-container">
-        <div class="input-control">
-          <label for="street-number">Street & Number</label>
-          <input type="text" name="" id="street-number" />
-        </div>
-        <div class="input-control">
-          <label for="zip-city">Zipcode & City</label>
-          <input type="text" name="" id="zip-city" />
-        </div>
-      </div>
-
-      <div class="input-container">
-        <div class="input-control">
-          <label for="phone">Phone</label>
-          <input type="text" name="" id="phone" />
-        </div>
-        <div class="input-control">
-          <label for="email">E-mail Adress</label>
-          <input type="text" name="" id="email" />
-        </div>
-      </div> -->
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -75,6 +32,7 @@ export default {
   data() {
     return {
       topic: "",
+      description: "",
     };
   },
   methods: {
@@ -83,9 +41,16 @@ export default {
 
       const newContact = {
         topic: this.topic,
+        description: this.description,
       };
 
+      console.log(newContact);
+
+      // emits data to the parent component. can be called in template.
+      this.$emit("add-contact", newContact);
+
       this.topic = "";
+      this.description = "";
     },
   },
 };
