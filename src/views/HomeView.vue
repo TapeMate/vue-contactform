@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     onAddContact(newContact) {
-      console.log(newContact);
       fetch("http://localhost:3000/contacts", {
         method: "POST",
         headers: {

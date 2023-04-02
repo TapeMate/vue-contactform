@@ -1,14 +1,16 @@
 {
   "contacts": [
     {
-      "topic": "asdfa",
-      "description": "asdfas",
+      "topic": "Das ist ein Testbetreff.",
+      "description": "Hier steht ganz viel Text als Dummy. Hier steht ganz viel Text als Dummy.\n\nHier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.\n\nHier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.\n\nbis denn\nschüss",
+      "firstName": "horst",
+      "lastName": "for ever",
+      "streetNumber": "horstweg 66",
+      "zipCity": "01548 musterdorf",
+      "phone": "0123456789",
+      "email": "some@one.de",
+      "verifyEmail": "some@one.de",
       "id": 1
-    },
-    {
-      "topic": "Brauche bitte 80 neue Olivenbäume im Garten",
-      "description": "Hallo Korbi, habe dein Ass auf Instagram gefunden und würde dir sehr gern ein blasen. ",
-      "id": 2
     }
   ]
 }
