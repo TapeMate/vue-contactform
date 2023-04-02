@@ -1,6 +1,7 @@
 <template>
   <div class="test-container">
-    <ContactForm />
+    <!-- with @the button submit event is triggert as well -->
+    <ContactForm @add-contact="onAddContact" />
   </div>
 </template>
 
@@ -11,6 +12,25 @@ export default {
   name: "ContactView",
   components: {
     ContactForm,
+  },
+  methods: {
+    onAddContact(newContact) {
+      console.log(newContact);
+      fetch("http://localhost:3000/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newContact),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>
