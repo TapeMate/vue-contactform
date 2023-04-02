@@ -20,9 +20,3 @@ export default {
   display: flex;
 }
 </style>
-
-<!-- ROADMAP:
-1. send data to db.json
-2. verify e-mail adress
-3. implement captcha
--->

@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <div class="form-entry-info">
+    <!-- <div class="form-entry-info">
       <h3>contact title</h3>
       <p>
         *Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eum
@@ -8,14 +8,20 @@
         perferendis assumenda maxime, rem quas. Similique, nemo non? Unde quod
         eligendi distinctio ea.
       </p>
-    </div>
+    </div> -->
 
-    <form action="#">
+    <form @submit="onSubmit">
       <div class="input-control">
         <label for="contact-topic">Topic</label>
-        <input type="text" name="" id="contact-topic" />
+        <input
+          type="text"
+          v-model="topic"
+          name="topic"
+          id="contact-topic"
+          placeholder="Type in your topic here..."
+        />
       </div>
-      <div class="input-control">
+      <!-- <div class="input-control">
         <label for="contact-textarea">Description</label
         ><textarea
           name=""
@@ -57,7 +63,7 @@
           <label for="email">E-mail Adress</label>
           <input type="text" name="" id="email" />
         </div>
-      </div>
+      </div> -->
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -66,6 +72,22 @@
 <script>
 export default {
   name: "ContactForm",
+  data() {
+    return {
+      topic: "",
+    };
+  },
+  methods: {
+    onSubmit(e) {
+      e.preventDefault();
+
+      const newContact = {
+        topic: this.topic,
+      };
+
+      this.topic = "";
+    },
+  },
 };
 </script>
 
