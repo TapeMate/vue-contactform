@@ -70,11 +70,6 @@ export default {
 </script>
 
 <style scoped>
-/* #contact-topic,
-#contact-textarea {
-  width: 100%;
-  display: inline-block;
-} */
 .input-container .input-control:nth-child(1) {
   margin-right: 15px;
 }
@@ -103,12 +98,14 @@ label {
   width: 100%;
   display: inline-block;
   padding: 0.5rem;
+  margin: 3px;
 }
 
 textarea {
   width: 80%;
   display: inline-block;
   padding: 1rem;
+  margin: 1rem;
 }
 .input-container label {
   text-align: right;
@@ -128,7 +125,6 @@ input,
 textarea,
 label {
   border: none;
-  margin: 3px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   outline: none;
 }
