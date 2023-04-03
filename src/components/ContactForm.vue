@@ -216,9 +216,10 @@ export default {
     verifyMailAdress() {
       const mail = document.querySelector("#email").value;
       const mailRepeat = document.querySelector("#email-repeat").value;
-      const mailRepeatStr = document.querySelector("#email-repeat");
+      const mailRepeatInput = document.querySelector("#email-repeat");
 
-      mailRepeatStr.addEventListener("paste", (e) => e.preventDefault());
+      // prevents copy pasting on email repeat input
+      mailRepeatInput.addEventListener("paste", (e) => e.preventDefault());
 
       if (mail !== mailRepeat) {
         document.querySelector("#email-repeat").classList.add("error");
@@ -231,6 +232,7 @@ export default {
         this.checkMailRepeat = true;
       }
     },
+
     // submit Data
     onSubmit(e) {
       e.preventDefault();
@@ -247,8 +249,7 @@ export default {
         id: `${newID}-${day}${month}${year}`,
         date: `${day}.${month}.${year}`,
         topic: this.topic,
-        description:
-          this.description.charAt(0).toUpperCase() + this.description.slice(1),
+        description: this.description,
         phoneNumber: this.phoneNumber,
         email: this.email,
         verifyEmail: this.verifyEmail,
@@ -272,10 +273,6 @@ export default {
 };
 </script>
 
-<!-- todos
-- verify phonenumber cant be like 111111111111
- -->
-
 <style scoped>
 .success-message {
   position: absolute;
@@ -289,7 +286,6 @@ export default {
   color: lime;
   background: rgba(0, 0, 0, 0.9);
 }
-
 .success-message h2 {
   width: 100%;
   height: 25%;
@@ -303,8 +299,6 @@ export default {
   color: rgb(165, 0, 0) !important;
   outline: 2px solid red !important;
 }
-/* .success {
-} */
 .phone-error,
 .mail-error,
 .mail-repeat-error,
@@ -318,29 +312,16 @@ export default {
   border: 1px solid;
   color: rgb(255, 0, 0);
 }
-
 #phone {
   width: 20%;
 }
-/* .blackbody {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 1rem;
-} */
-/* .input-container .input-control:nth-child(1) {
-  margin-right: 15px;
-} */
 .form-entry-info {
   background: rgba(255, 255, 255, 0.6);
   padding: 1rem 0;
   margin-bottom: 30px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
 }
-/* .form-entry-info p,
-.form-entry-info h3 {
-  padding: 1rem;
-} */
 .form-container {
-  /* width: 100%; */
   padding: 4% 10% 2%;
   background-image: url("../assets/slider/slider02.jpg");
   background-size: cover;
@@ -350,7 +331,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
 }
-
 input,
 label {
   width: 100%;
@@ -361,7 +341,6 @@ label {
 input {
   padding: 0.5rem 1rem;
 }
-
 textarea {
   width: 100%;
   height: 200px;
@@ -375,26 +354,21 @@ textarea {
   max-width: max-content;
   min-width: 120px;
 }
-
 .input-container .input-control {
   display: flex;
   justify-content: left;
   width: 100%;
 }
-
 .input-container .input-control:nth-child(2) {
   margin-bottom: 0px !important;
 }
-
 .input-container .input-control label,
 .input-container .input-control input {
   width: 20%;
 }
-
 .input-control {
   margin-bottom: 15px;
 }
-
 input,
 textarea,
 label {
@@ -402,30 +376,23 @@ label {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   outline: none;
 }
-
 input:focus,
 textarea:focus {
-  /* outline: 3px solid #bb8b73; */
   background: #bdfabd;
   outline: 1px solid greenyellow;
 }
-
 label {
   background: rgba(255, 255, 255, 0.8);
   font-weight: bold;
   font-size: 12px;
 }
-
 form {
   padding: 1rem;
   background: #333;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  /* justify-content: space-around;
-  align-items: center; */
 }
-
 #submit {
   width: 150px;
   height: auto;
@@ -440,19 +407,16 @@ form {
   transition: 0.5s;
   border-radius: 5px;
 }
-
 #submit:hover {
   background: rgba(12, 124, 12, 0.8);
   color: #fff;
   border-radius: 15px;
 }
-
 #submit:disabled {
   color: #555;
   background: #aaa;
   box-shadow: none;
 }
-
 #submit:disabled:hover {
   border-radius: 5px;
   background: #aaa;
