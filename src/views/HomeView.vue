@@ -13,7 +13,7 @@ import ShowContacts from "../components/ShowContacts.vue";
 import DataView from "./DataView.vue";
 
 export default {
-  name: "ContactView",
+  name: "HomeView",
   components: {
     ContactForm,
     ShowContacts,

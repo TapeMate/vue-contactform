@@ -5,6 +5,9 @@
         <h5>ID</h5>
       </div>
       <div class="contact-header">
+        <h5>DATE</h5>
+      </div>
+      <div class="contact-header">
         <h5>TOPIC</h5>
       </div>
       <div class="contact-header">
@@ -24,6 +27,9 @@
     <div v-for="item in data" :key="item.id" class="contact-data-column">
       <div class="contact-id">
         <span>{{ item.id }}</span>
+      </div>
+      <div class="contact-date">
+        <span>{{ item.date }}</span>
       </div>
       <div class="contact-topic">
         <span>{{ item.topic }}</span>
@@ -74,16 +80,17 @@ export default {
 .contact-header-wrapper {
   width: 100%;
   display: grid;
-  grid-template-columns: 4% 20% 10% 10% 52% 4%;
+  grid-template-columns: 9% 6% 13% 9% 10% 48% 4%;
 }
 .contact-data-column {
   width: 100%;
   height: max-content;
   display: grid;
-  grid-template-columns: 4% 20% 10% 10% 52% 4%;
+  grid-template-columns: 9% 6% 13% 9% 10% 48% 4%;
   color: white;
 }
 .contact-id,
+.contact-date,
 .contact-topic,
 .contact-phone,
 .contact-email,

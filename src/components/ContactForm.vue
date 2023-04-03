@@ -82,8 +82,12 @@
 <script>
 export default {
   name: "ContactForm",
+  emits: ["add-contact"],
   data() {
     return {
+      id: "",
+      date: "",
+
       topic: "",
       description: "",
       phoneNumber: "",
@@ -96,11 +100,22 @@ export default {
       requestSuccess: false,
     };
   },
+
   methods: {
     onSubmit(e) {
       e.preventDefault();
 
+      const currentDate = new Date();
+      const day = currentDate.getDate();
+      // Add 1 because months are zero-indexed
+      const month = currentDate.getMonth() + 1;
+      const year = currentDate.getFullYear();
+
+      const newID = Math.floor(Math.random() * 10000);
+
       const newContact = {
+        id: `${newID}-${day}${month}${year}`,
+        date: `${day}.${month}.${year}`,
         topic: this.topic,
         description:
           this.description.charAt(0).toUpperCase() + this.description.slice(1),
@@ -121,6 +136,7 @@ export default {
       this.requestSuccess = true;
       setTimeout(() => {
         this.requestSuccess = false;
+        window.location.reload();
       }, 2500);
     },
 

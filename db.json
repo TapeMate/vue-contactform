@@ -1,68 +1,31 @@
 {
   "contacts": [
     {
-      "topic": "Test Topic for testing.",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima voluptate omnis praesentium delectus earum tenetur quae similique nisi sapiente aut illum nobis ipsam enim, accusamus pariatur! Ullam, perspiciatis. Amet animi officiis a quisquam et doloribus possimus dicta?\nSapiente dolorem quis perspiciatis, temporibus at, sint reprehenderit iure porro sed ipsam corporis! Natus eligendi maxime praesentium rerum nihil officiis accusantium quod, a vitae. Enim suscipit fuga amet. Nesciunt, quam.\n\nGreetings,\nDev-Team",
-      "phone": "0150 48255998",
+      "date": "3.4.2023",
+      "topic": "Das ist ein Testbetreff",
+      "description": "Hallo,\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda quos cum quas blanditiis laudantium quasi. Alias facere ipsa inventore quibusdam nam rerum amet. Architecto et provident dolorum esse. Earum!\nAsperiores doloribus nostrum quia sed minima quos qui porro cupiditate delectus similique labore quasi, ut eos dignissimos ex unde rerum facilis, consectetur aspernatur. Cum enim voluptates est architecto tenetur ipsum.\nEos repudiandae qui possimus? Explicabo, dolorum nemo! Nostrum, dolorem illum necessitatibus ipsa laudantium, tenetur vitae corporis eligendi, doloribus sunt et iste. Ut vel quisquam provident distinctio a cum iusto possimus.\n\nViele Grüße,\nHubert",
+      "phoneNumber": "0150 123456789",
       "email": "some@one.de",
       "verifyEmail": "some@one.de",
       "id": 1
     },
     {
-      "topic": "test 2",
-      "description": "testing again.",
-      "phone": "1234",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 2
-    },
-    {
-      "topic": "Und noch einer....",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima voluptate omnis praesentium delectus earum tenetur quae similique nisi sapiente aut illum nobis ipsam enim, accusamus pariatur! Ullam, perspiciatis. Amet animi officiis a quis",
-      "phone": "87941654984165153",
+      "date": "3.4.2023",
+      "topic": "This ist just a test",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda quos cum quas blanditiis laudantium quasi. Alias facere ipsa inventore quibusdam nam rerum amet. Architecto et provident dolorum esse. Earum!\nAsperiores doloribus nostrum quia sed minima quos qui porro cupiditate delectus similique labore quasi, ut eos dignissimos ex unde rerum facilis, consectetur aspernatur. Cum enim voluptates est architecto tenetur ipsum.\nEos repudiandae qui possimus? Explicabo, dolorum nemo! Nostrum, dolorem illum necessitatibus ipsa laudantium, tenetur vitae corporis eligendi, doloribus sunt et iste. Ut vel quisquam provident distinctio a cum iusto possimus.",
+      "phoneNumber": "0150123456789",
       "email": "some@one.de",
       "verifyEmail": "some@one.de",
       "id": 3
     },
     {
-      "topic": "test 4",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima",
-      "phone": "125156456",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 4
-    },
-    {
-      "topic": "Baumfällung Altstadt",
-      "description": "Ich brauch text un so.",
-      "phoneNumber": "0150 11112222",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 5
-    },
-    {
-      "topic": "Fafdsf",
-      "description": "Asdfasfdas",
-      "phoneNumber": "000000000000",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 6
-    },
-    {
-      "topic": "Test",
-      "description": "Test",
-      "phoneNumber": "05150153156",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 7
-    },
-    {
-      "topic": "Ich brauch ne Baumfällung",
-      "description": "Sau geil.\n\nUmwelt weg.\n\ngibt Geld.\n\nmach hinne.\n\nSchüss",
-      "phoneNumber": "0151 12345678",
-      "email": "some@one.de",
-      "verifyEmail": "some@one.de",
-      "id": 8
+      "id": "8660-342023",
+      "date": "3.4.2023",
+      "topic": "",
+      "description": "",
+      "phoneNumber": "",
+      "email": "",
+      "verifyEmail": ""
     }
   ]
 }
