@@ -7,14 +7,22 @@
     <form @submit="onSubmit">
       <div class="input-control" style="width: 25%">
         <label for="topic">Topic</label>
-        <input
-          @keyup="validateTopic"
-          type="text"
-          v-model="topic"
-          name="topic"
-          id="topic"
-          placeholder="Type in your topic here"
-        />
+        <div class="success-icon-wrapper">
+          <input
+            @keyup="validateTopic"
+            type="text"
+            v-model="topic"
+            name="topic"
+            id="topic"
+            placeholder="Type in your topic here"
+            :class="checkTopic === true ? 'success' : ''"
+          />
+          <i
+            v-if="checkTopic === true"
+            class="fa-regular fa-circle-check"
+            id="topic-success"
+          ></i>
+        </div>
         <p class="topic-error" v-if="errorTopic">
           {{ errorTopic }}
         </p>
@@ -33,56 +41,74 @@
           {{ errorDescription }}
         </p>
       </div>
-
       <div class="input-container">
         <div class="input-control">
           <label for="phone">Phone</label>
-          <input
-            @keyup="validatePhoneNumber"
-            type="text"
-            v-model="phoneNumber"
-            name="phone"
-            id="phone"
-            placeholder="Enter your phonenumber"
-          />
+          <div class="input-control">
+            <div class="success-icon-wrapper">
+              <input
+                @keyup="validatePhoneNumber"
+                type="text"
+                v-model="phoneNumber"
+                name="phone"
+                id="phone"
+                placeholder="Enter your phonenumber"
+                :class="checkPhone === true ? 'success' : ''"
+              />
+              <i
+                v-if="checkPhone === true"
+                class="fa-regular fa-circle-check"
+                id="phone-success"
+              ></i>
+            </div>
+          </div>
           <p class="phone-error" v-if="errorPhone">
             {{ errorPhone }}
           </p>
         </div>
-
         <div class="input-control">
           <label for="email">E-mail Adress</label>
-          <input
-            @keyup="validateMailAdress"
-            type="email"
-            v-model="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email adress"
-          />
+          <div class="success-icon-wrapper">
+            <input
+              @keyup="validateMailAdress"
+              type="email"
+              v-model="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email adress"
+              :class="checkMail === true ? 'success' : ''"
+            />
+            <i
+              v-if="checkMail === true"
+              class="fa-regular fa-circle-check"
+              id="mail-success"
+            ></i>
+          </div>
           <p class="mail-error" v-if="errorMessageMail">
             {{ errorMessageMail }}
           </p>
         </div>
         <div class="input-control">
           <label for="email-repeat">E-mail Verification</label>
-          <input
-            @keyup="verifyMailAdress"
-            type="email"
-            v-model="verifyEmail"
-            name="email-repeat"
-            id="email-repeat"
-            placeholder="Repeat your email adress"
-          />
-          <p class="mail-repeat-error" v-if="errorMailRepeat">
-            {{ errorMailRepeat }}
-          </p>
-          <p
-            class="mail-repeat-error"
-            v-if="errorMailRepeatEmpty && verifyEmail.length === 0"
-          >
-            {{ errorMailRepeatEmpty }}
-          </p>
+          <div class="success-icon-wrapper">
+            <input
+              @keyup="verifyMailAdress"
+              type="email"
+              v-model="verifyEmail"
+              name="email-repeat"
+              id="email-repeat"
+              placeholder="Repeat your email adress"
+              :class="checkMailRepeat === true ? 'success' : ''"
+            />
+            <i
+              v-if="checkMailRepeat === true"
+              class="fa-regular fa-circle-check"
+              id="mail-repeat-success"
+            ></i>
+            <p class="mail-repeat-error" v-if="errorMailRepeat">
+              {{ errorMailRepeat }}
+            </p>
+          </div>
         </div>
       </div>
       <button type="submit" id="submit" disabled="disabled">Submit</button>
@@ -110,7 +136,6 @@ export default {
       errorPhone: "",
       errorMessageMail: "",
       errorMailRepeat: "",
-      errorMailRepeatEmpty: "",
       // build checksum Object for validation
       screenOut: false,
 
@@ -133,10 +158,8 @@ export default {
         this.checkMail === true &&
         this.checkMailRepeat === true
       ) {
-        console.log("Submit enabled");
         document.querySelector("#submit").disabled = false;
       } else {
-        console.log("Submit disabled");
         document.querySelector("#submit").disabled = true;
       }
     },
@@ -274,6 +297,26 @@ export default {
 </script>
 
 <style scoped>
+.success-icon-wrapper {
+  position: relative;
+}
+#topic-success {
+  position: absolute;
+  display: inline;
+  color: rgb(0, 187, 0);
+  top: 28%;
+  right: 2px;
+}
+
+#phone-success,
+#mail-success,
+#mail-repeat-success {
+  position: absolute;
+  display: inline;
+  color: rgb(0, 187, 0);
+  top: 28%;
+  right: 9px;
+}
 .success-message {
   position: absolute;
   z-index: 1;
@@ -295,10 +338,15 @@ export default {
   margin-top: -900px;
 }
 .error {
-  background: #ffe3e3 !important;
-  color: rgb(165, 0, 0) !important;
-  outline: 2px solid red !important;
+  background: #fdebeb !important;
+  /* color: rgb(165, 0, 0) !important; */
+  outline: 1px solid red !important;
 }
+.success {
+  background: rgb(209, 255, 209);
+  color: rgb(0, 85, 0);
+}
+
 .phone-error,
 .mail-error,
 .mail-repeat-error,
@@ -311,6 +359,7 @@ export default {
   background: #ffe3e3;
   border: 1px solid;
   color: rgb(255, 0, 0);
+  display: inline;
 }
 #phone {
   width: 20%;
@@ -340,6 +389,7 @@ label {
 }
 input {
   padding: 0.5rem 1rem;
+  min-width: 200px;
 }
 textarea {
   width: 100%;
@@ -378,8 +428,8 @@ label {
 }
 input:focus,
 textarea:focus {
-  background: #bdfabd;
-  outline: 1px solid greenyellow;
+  background: #fff8e4;
+  outline: 1px solid rgb(255, 199, 78);
 }
 label {
   background: rgba(255, 255, 255, 0.8);

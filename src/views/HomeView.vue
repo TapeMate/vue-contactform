@@ -1,23 +1,19 @@
 <template>
   <div class="test-container">
-    <!-- with @the button submit event is triggert as well -->
     <ContactForm @add-contact="addContact" />
-    <ShowContacts />
-    <DataView />
+    <!-- <ShowContacts /> -->
   </div>
 </template>
 
 <script>
 import ContactForm from "../components/ContactForm.vue";
-import ShowContacts from "../components/ShowContacts.vue";
-import DataView from "./DataView.vue";
+// import ShowContacts from "../components/ShowContacts.vue";
 
 export default {
   name: "HomeView",
   components: {
     ContactForm,
-    ShowContacts,
-    DataView,
+    // ShowContacts,
   },
   methods: {
     addContact(newContact) {

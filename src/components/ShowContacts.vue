@@ -35,7 +35,7 @@
         <span>{{ item.topic }}</span>
       </div>
       <div class="contact-phone">
-        <span>{{ item.phone }}</span>
+        <span>{{ item.phoneNumber }}</span>
       </div>
       <div class="contact-email">
         <span>{{ item.email }}</span>
