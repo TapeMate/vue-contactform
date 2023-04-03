@@ -17,6 +17,7 @@
         <h5>DESCRIPTION</h5>
       </div>
     </div>
+
     <div v-for="item in data" :key="item.id" class="contact-data-column">
       <div class="contact-id">
         <span>{{ item.id }}</span>
