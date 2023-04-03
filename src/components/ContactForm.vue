@@ -1,6 +1,5 @@
 <template>
-  <!-- <div v-if="this.requestSuccess === true" class="success-message"> -->
-  <div class="success-message">
+  <div v-if="this.requestSuccess === true" class="success-message">
     <h2>Contact Request has been send successfully!</h2>
     <i class="fa-solid fa-envelope-circle-check fa-bounce"></i>
   </div>
@@ -119,6 +118,10 @@ export default {
       this.phoneNumber = "";
       this.email = "";
       this.verifyEmail = "";
+      this.requestSuccess = true;
+      setTimeout(() => {
+        this.requestSuccess = false;
+      }, 2500);
     },
 
     toUpperCase(e) {
@@ -169,6 +172,13 @@ export default {
   },
 };
 </script>
+
+<!-- todos
+- import date to data on submit
+- generate uniq id on submit
+- set min max values for topic / description input
+- verify phonenumber cant be like 111111111111
+ -->
 
 <style scoped>
 .success-message {
