@@ -4,28 +4,36 @@
     <i class="fa-solid fa-envelope-circle-check fa-bounce"></i>
   </div>
   <div class="form-container">
-    <form @submit="onSubmit">
+    <form @submit="onSubmit" @keyup="enableSubmit">
       <div class="input-control" style="width: 25%">
         <label for="topic">Topic</label>
         <input
-          @keyup="toUpperCase"
+          @keyup="validateTopic"
+          @focus="validateTopic"
           type="text"
           v-model="topic"
           name="topic"
           id="topic"
           placeholder="Type in your topic here"
         />
+        <p class="topic-error" v-if="errorTopic">
+          {{ errorTopic }}
+        </p>
       </div>
       <div class="input-control">
         <label for="description">Description</label>
         <textarea
-          @keyup="toUpperCase"
+          @keyup="validateDescription"
+          @focus="validateDescription"
           type="text"
           v-model="description"
           name="description"
           id="description"
           placeholder="Type in your topic here"
         />
+        <p class="description-error" v-if="errorDescription">
+          {{ errorDescription }}
+        </p>
       </div>
 
       <div class="input-container">
@@ -33,15 +41,14 @@
           <label for="phone">Phone</label>
           <input
             @keyup="validatePhoneNumber"
-            @focus="validatePhoneNumber"
             type="text"
             v-model="phoneNumber"
             name="phone"
             id="phone"
             placeholder="Enter your phonenumber"
           />
-          <p class="phone-error" v-if="errorMessagePhone">
-            {{ errorMessagePhone }}
+          <p class="phone-error" v-if="errorPhone">
+            {{ errorPhone }}
           </p>
         </div>
 
@@ -49,6 +56,7 @@
           <label for="email">E-mail Adress</label>
           <input
             @keyup="validateMailAdress"
+            @focus="validateMailAdress"
             type="email"
             v-model="email"
             name="email"
@@ -63,18 +71,25 @@
           <label for="email-repeat">E-mail Verification</label>
           <input
             @keyup="verifyMailAdress"
+            @focus="verifyMailAdress"
             type="email"
             v-model="verifyEmail"
             name="email-repeat"
             id="email-repeat"
             placeholder="Repeat your email adress"
           />
-          <p class="mail-repeat-error" v-if="errorMessageMailRepeat">
-            {{ errorMessageMailRepeat }}
+          <p class="mail-repeat-error" v-if="errorMailRepeat">
+            {{ errorMailRepeat }}
+          </p>
+          <p
+            class="mail-repeat-error"
+            v-if="errorMailRepeatEmpty && verifyEmail.length === 0"
+          >
+            {{ errorMailRepeatEmpty }}
           </p>
         </div>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" id="submit" disabled="disabled">Submit</button>
     </form>
   </div>
 </template>
@@ -94,14 +109,121 @@ export default {
       email: "",
       verifyEmail: "",
       // for input error & success handling
-      errorMessagePhone: "",
+      errorTopic: "",
+      errorDescription: "",
+      errorPhone: "",
       errorMessageMail: "",
-      errorMessageMailRepeat: "",
+      errorMailRepeat: "",
+      errorMailRepeatEmpty: "",
+      // build checksum Object for validation
       requestSuccess: false,
+
+      // status for enable Submit
+      checkTopic: false,
+      checkDescription: false,
+      checkPhone: false,
+      checkMail: false,
     };
   },
 
   methods: {
+    // enabling Submit Button after checksum is "true"
+    enableSubmit() {
+      if (this.checkTopic === true && this.checkDescription === true) {
+        console.log("Submit enabled");
+      } else {
+        return;
+      }
+    },
+
+    // validate Topic
+    toUpperCase(e) {
+      const str = e.value.charAt(0).toUpperCase() + e.value.slice(1);
+      document.querySelector(`#${e.id}`).value = str;
+    },
+
+    checkTopicLength(e) {
+      if (this.topic.length <= 8) {
+        e.classList.add("error");
+        this.errorTopic = "Topic to short.";
+      } else {
+        e.classList.remove("error");
+        this.errorTopic = "";
+        this.checkTopic = true;
+      }
+    },
+
+    validateTopic(e) {
+      const target = e.currentTarget;
+      this.toUpperCase(target);
+      this.checkTopicLength(target);
+    },
+
+    // validate Description
+    checkDescriptionLength(e) {
+      if (this.description.length <= 30) {
+        e.classList.add("error");
+        this.errorDescription = "Description to short.";
+      } else {
+        e.classList.remove("error");
+        this.errorDescription = "";
+        this.checkDescription = true;
+      }
+    },
+
+    validateDescription(e) {
+      const target = e.currentTarget;
+      this.toUpperCase(target);
+      this.checkDescriptionLength(target);
+    },
+
+    // validate Phone
+    validatePhoneNumber(e) {
+      const regex = /^(\+49|0)[\d\s-()]{8,}$/;
+      const target = e.currentTarget;
+      if (!regex.test(this.phoneNumber)) {
+        target.classList.add("error");
+        this.errorPhone = "Please enter a valid phone number.";
+      } else {
+        target.classList.remove("error");
+        this.errorPhone = "";
+        this.checkPhone = true;
+      }
+    },
+
+    // validate E-Mail
+    validateMailAdress() {
+      const regex = /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+      if (!regex.test(this.email)) {
+        document.querySelector("#email").classList.add("error");
+        this.errorMessageMail = "Please enter a valid E-Mail adress.";
+      } else {
+        document.querySelector("#email").classList.remove("error");
+        this.errorMessageMail = "";
+      }
+    },
+
+    verifyMailAdress() {
+      const mail = document.querySelector("#email").value;
+      const mailRepeat = document.querySelector("#email-repeat").value;
+      const mailRepeatStr = document.querySelector("#email-repeat");
+
+      mailRepeatStr.addEventListener("paste", (e) => e.preventDefault());
+
+      if (mail !== mailRepeat) {
+        document.querySelector("#email-repeat").classList.add("error");
+        this.errorMailRepeat =
+          "Your E-Mail adresses don't match. Please check.";
+      } else if (mailRepeat.length === 0) {
+        document.querySelector("#email-repeat").classList.add("error");
+        this.errorMailRepeatEmpty =
+          "Field can't be empty. Please re-enter your mail adress.";
+      } else {
+        document.querySelector("#email-repeat").classList.remove("error");
+        this.errorMailRepeat = "";
+      }
+    },
+    // submit Data
     onSubmit(e) {
       e.preventDefault();
 
@@ -123,7 +245,6 @@ export default {
         email: this.email,
         verifyEmail: this.verifyEmail,
       };
-
       // emits data to the parent component. can be called in template.
       this.$emit("add-contact", newContact);
 
@@ -139,59 +260,13 @@ export default {
         window.location.reload();
       }, 2500);
     },
-
-    toUpperCase(e) {
-      const id = e.currentTarget.id;
-      const str = e.currentTarget.value;
-      const upperStr = str.charAt(0).toUpperCase() + str.slice(1);
-      document.querySelector(`#${id}`).value = upperStr;
-    },
-
-    validatePhoneNumber() {
-      const regex = /^(\+49|0)[\d\s-()]{8,}$/;
-      if (!regex.test(this.phoneNumber)) {
-        this.errorMessagePhone = "Please enter a valid phone number.";
-        document.querySelector("#phone").classList.add("error");
-      } else {
-        this.errorMessagePhone = "";
-        document.querySelector("#phone").classList.remove("error");
-      }
-    },
-
-    validateMailAdress() {
-      const regex = /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
-      if (!regex.test(this.email)) {
-        this.errorMessageMail = "Please enter a valid E-Mail adress.";
-        document.querySelector("#email").classList.add("error");
-      } else {
-        this.errorMessageMail = "";
-        document.querySelector("#email").classList.remove("error");
-      }
-    },
-
-    verifyMailAdress() {
-      const mail = document.querySelector("#email").value;
-      const mailRepeat = document.querySelector("#email-repeat").value;
-      const mailRepeatStr = document.querySelector("#email-repeat");
-
-      mailRepeatStr.addEventListener("paste", (e) => e.preventDefault());
-
-      if (mail !== mailRepeat) {
-        this.errorMessageMailRepeat =
-          "Your E-Mail adresses don't match. Please check.";
-        document.querySelector("#email-repeat").classList.add("error");
-      } else {
-        this.errorMessageMailRepeat = "";
-        document.querySelector("#email-repeat").classList.remove("error");
-      }
-    },
   },
 };
 </script>
 
 <!-- todos
-- import date to data on submit
-- generate uniq id on submit
+- enable submit button function
+- verify email and other fields befor POST
 - set min max values for topic / description input
 - verify phonenumber cant be like 111111111111
  -->
@@ -227,7 +302,9 @@ export default {
 } */
 .phone-error,
 .mail-error,
-.mail-repeat-error {
+.mail-repeat-error,
+.topic-error,
+.description-error {
   padding: 0.5rem;
   font-size: 12px;
   margin: 2px;
