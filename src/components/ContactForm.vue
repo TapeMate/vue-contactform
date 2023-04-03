@@ -1,39 +1,28 @@
 <template>
   <div class="form-container">
-    <div class="blackbody">
-      <div class="form-entry-info">
-        <h3>contact title</h3>
-        <p>
-          *Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eum
-          similique omnis molestias temporibus voluptates distinctio nesciunt
-          perferendis assumenda maxime, rem quas. Similique, nemo non? Unde quod
-          eligendi distinctio ea.
-        </p>
+    <form @submit="onSubmit">
+      <div class="input-control">
+        <label for="contact-topic">Topic</label>
+        <input
+          type="text"
+          v-model="topic"
+          name="topic"
+          id="contact-topic"
+          placeholder="Type in your topic here"
+        />
+      </div>
+      <div class="input-control">
+        <label for="contact-description">Description</label>
+        <textarea
+          type="text"
+          v-model="description"
+          name="description"
+          id="contact-description"
+          placeholder="Type in your topic here"
+        />
       </div>
 
-      <form @submit="onSubmit">
-        <div class="input-control">
-          <label for="contact-topic">Topic</label>
-          <input
-            type="text"
-            v-model="topic"
-            name="topic"
-            id="contact-topic"
-            placeholder="Type in your topic here"
-          />
-        </div>
-        <div class="input-control">
-          <label for="contact-description">Description</label>
-          <textarea
-            type="text"
-            v-model="description"
-            name="description"
-            id="contact-description"
-            placeholder="Type in your topic here"
-          />
-        </div>
-
-        <div class="input-container">
+      <!-- <div class="input-container">
           <div class="input-control">
             <label for="firstName">First Name</label>
             <input
@@ -77,45 +66,44 @@
               placeholder="Enter your zip code and city"
             />
           </div>
-        </div>
+        </div> -->
 
-        <div class="input-container">
-          <div class="input-control">
-            <label for="phone">Phone</label>
-            <input
-              type="text"
-              v-model="phone"
-              name="phone"
-              id="phone"
-              placeholder="Enter your phonenumber"
-            />
-          </div>
+      <div class="input-container">
+        <div class="input-control">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            v-model="phone"
+            name="phone"
+            id="phone"
+            placeholder="Enter your phonenumber"
+          />
         </div>
-        <div class="input-container">
-          <div class="input-control">
-            <label for="email">E-mail Adress</label>
-            <input
-              type="text"
-              v-model="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email adress"
-            />
-          </div>
-          <div class="input-control">
-            <label for="verifyEmail">E-mail Verification</label>
-            <input
-              type="text"
-              v-model="verifyEmail"
-              name="verifyEmail"
-              id="verifyEmail"
-              placeholder="Repeat your email adress"
-            />
-          </div>
+      </div>
+      <div class="input-container">
+        <div class="input-control">
+          <label for="email">E-mail Adress</label>
+          <input
+            type="text"
+            v-model="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email adress"
+          />
         </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        <div class="input-control">
+          <label for="verifyEmail">E-mail Verification</label>
+          <input
+            type="text"
+            v-model="verifyEmail"
+            name="verifyEmail"
+            id="verifyEmail"
+            placeholder="Repeat your email adress"
+          />
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -126,10 +114,10 @@ export default {
     return {
       topic: "",
       description: "",
-      firstName: "",
-      lastName: "",
-      streetNumber: "",
-      zipCity: "",
+      // firstName: "",
+      // lastName: "",
+      // streetNumber: "",
+      // zipCity: "",
       phone: "",
       email: "",
       verifyEmail: "",
@@ -142,10 +130,10 @@ export default {
       const newContact = {
         topic: this.topic,
         description: this.description,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        streetNumber: this.streetNumber,
-        zipCity: this.zipCity,
+        // firstName: this.firstName,
+        // lastName: this.lastName,
+        // streetNumber: this.streetNumber,
+        // zipCity: this.zipCity,
         phone: this.phone,
         email: this.email,
         verifyEmail: this.verifyEmail,
@@ -157,10 +145,10 @@ export default {
       // resets input values.
       this.topic = "";
       this.description = "";
-      this.firstName = "";
-      this.lastName = "";
-      this.streetNumber = "";
-      this.zipCity = "";
+      // this.firstName = "";
+      // this.lastName = "";
+      // this.streetNumber = "";
+      // this.zipCity = "";
       this.phone = "";
       this.email = "";
       this.verifyEmail = "";

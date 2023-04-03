@@ -1,20 +1,26 @@
 <template>
   <div class="test-container">
     <!-- with @the button submit event is triggert as well -->
-    <ContactForm @add-contact="onAddContact" />
+    <ContactForm @add-contact="addContact" />
+    <ShowContacts />
+    <DataView />
   </div>
 </template>
 
 <script>
 import ContactForm from "../components/ContactForm.vue";
+import ShowContacts from "../components/ShowContacts.vue";
+import DataView from "./DataView.vue";
 
 export default {
   name: "ContactView",
   components: {
     ContactForm,
+    ShowContacts,
+    DataView,
   },
   methods: {
-    onAddContact(newContact) {
+    addContact(newContact) {
       fetch("http://localhost:3000/contacts", {
         method: "POST",
         headers: {
@@ -37,5 +43,7 @@ export default {
 <style scoped>
 .test-container {
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 </style>

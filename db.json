@@ -1,16 +1,60 @@
 {
   "contacts": [
     {
-      "topic": "Das ist ein Testbetreff.",
-      "description": "Hier steht ganz viel Text als Dummy. Hier steht ganz viel Text als Dummy.\n\nHier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.\n\nHier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.Hier steht ganz viel Text als Dummy.\n\nbis denn\nschüss",
-      "firstName": "horst",
-      "lastName": "for ever",
-      "streetNumber": "horstweg 66",
-      "zipCity": "01548 musterdorf",
-      "phone": "0123456789",
+      "topic": "Test Topic for testing.",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima voluptate omnis praesentium delectus earum tenetur quae similique nisi sapiente aut illum nobis ipsam enim, accusamus pariatur! Ullam, perspiciatis. Amet animi officiis a quisquam et doloribus possimus dicta?\nSapiente dolorem quis perspiciatis, temporibus at, sint reprehenderit iure porro sed ipsam corporis! Natus eligendi maxime praesentium rerum nihil officiis accusantium quod, a vitae. Enim suscipit fuga amet. Nesciunt, quam.\n\nGreetings,\nDev-Team",
+      "phone": "0150 48255998",
       "email": "some@one.de",
       "verifyEmail": "some@one.de",
       "id": 1
+    },
+    {
+      "topic": "test 2",
+      "description": "testing again.",
+      "phone": "1234",
+      "email": "some@one.de",
+      "verifyEmail": "some@one.de",
+      "id": 2
+    },
+    {
+      "topic": "Und noch einer....",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima voluptate omnis praesentium delectus earum tenetur quae similique nisi sapiente aut illum nobis ipsam enim, accusamus pariatur! Ullam, perspiciatis. Amet animi officiis a quis",
+      "phone": "87941654984165153",
+      "email": "some@one.de",
+      "verifyEmail": "some@one.de",
+      "id": 3
+    },
+    {
+      "topic": "test 4",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam quasi iste, est ipsa aut quae eaque perspiciatis quisquam quam illum maiores soluta fuga Expedita minima",
+      "phone": "125156456",
+      "email": "some@one.de",
+      "verifyEmail": "some@one.de",
+      "id": 4
+    },
+    {
+      "topic": "",
+      "description": "",
+      "phone": "",
+      "email": "",
+      "verifyEmail": "",
+      "id": 5
+    },
+    {
+      "topic": "",
+      "description": "",
+      "phone": "",
+      "email": "",
+      "verifyEmail": "",
+      "id": 6
+    },
+    {
+      "topic": "",
+      "description": "",
+      "phone": "",
+      "email": "",
+      "verifyEmail": "",
+      "id": 7
     }
   ]
 }
