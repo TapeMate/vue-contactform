@@ -1,15 +1,14 @@
 <template>
-  <div v-if="this.requestSuccess === true" class="success-message">
+  <div v-if="this.screenOut === true" class="success-message">
     <h2>Contact Request has been send successfully!</h2>
     <i class="fa-solid fa-envelope-circle-check fa-bounce"></i>
   </div>
-  <div class="form-container">
-    <form @submit="onSubmit" @keyup="enableSubmit">
+  <div @keyup="enableSubmit" class="form-container">
+    <form @submit="onSubmit">
       <div class="input-control" style="width: 25%">
         <label for="topic">Topic</label>
         <input
           @keyup="validateTopic"
-          @focus="validateTopic"
           type="text"
           v-model="topic"
           name="topic"
@@ -24,7 +23,6 @@
         <label for="description">Description</label>
         <textarea
           @keyup="validateDescription"
-          @focus="validateDescription"
           type="text"
           v-model="description"
           name="description"
@@ -56,7 +54,6 @@
           <label for="email">E-mail Adress</label>
           <input
             @keyup="validateMailAdress"
-            @focus="validateMailAdress"
             type="email"
             v-model="email"
             name="email"
@@ -71,7 +68,6 @@
           <label for="email-repeat">E-mail Verification</label>
           <input
             @keyup="verifyMailAdress"
-            @focus="verifyMailAdress"
             type="email"
             v-model="verifyEmail"
             name="email-repeat"
@@ -116,23 +112,32 @@ export default {
       errorMailRepeat: "",
       errorMailRepeatEmpty: "",
       // build checksum Object for validation
-      requestSuccess: false,
+      screenOut: false,
 
       // status for enable Submit
       checkTopic: false,
       checkDescription: false,
       checkPhone: false,
       checkMail: false,
+      checkMailRepeat: false,
     };
   },
 
   methods: {
-    // enabling Submit Button after checksum is "true"
+    // enabling Submit Button after checksum is "true" and check if changed
     enableSubmit() {
-      if (this.checkTopic === true && this.checkDescription === true) {
+      if (
+        this.checkTopic === true &&
+        this.checkDescription === true &&
+        this.checkPhone === true &&
+        this.checkMail === true &&
+        this.checkMailRepeat === true
+      ) {
         console.log("Submit enabled");
+        document.querySelector("#submit").disabled = false;
       } else {
-        return;
+        console.log("Submit disabled");
+        document.querySelector("#submit").disabled = true;
       }
     },
 
@@ -146,6 +151,7 @@ export default {
       if (this.topic.length <= 8) {
         e.classList.add("error");
         this.errorTopic = "Topic to short.";
+        this.checkTopic = false;
       } else {
         e.classList.remove("error");
         this.errorTopic = "";
@@ -164,6 +170,7 @@ export default {
       if (this.description.length <= 30) {
         e.classList.add("error");
         this.errorDescription = "Description to short.";
+        this.checkDescription = false;
       } else {
         e.classList.remove("error");
         this.errorDescription = "";
@@ -179,11 +186,12 @@ export default {
 
     // validate Phone
     validatePhoneNumber(e) {
-      const regex = /^(\+49|0)[\d\s-()]{8,}$/;
+      const regex = /^(\+49|0)(?:(?!\d*(\d)\1{7})[\d\s()-]{8,})$/;
       const target = e.currentTarget;
       if (!regex.test(this.phoneNumber)) {
         target.classList.add("error");
         this.errorPhone = "Please enter a valid phone number.";
+        this.checkPhone = false;
       } else {
         target.classList.remove("error");
         this.errorPhone = "";
@@ -197,9 +205,11 @@ export default {
       if (!regex.test(this.email)) {
         document.querySelector("#email").classList.add("error");
         this.errorMessageMail = "Please enter a valid E-Mail adress.";
+        this.checkMail = false;
       } else {
         document.querySelector("#email").classList.remove("error");
         this.errorMessageMail = "";
+        this.checkMail = true;
       }
     },
 
@@ -214,13 +224,11 @@ export default {
         document.querySelector("#email-repeat").classList.add("error");
         this.errorMailRepeat =
           "Your E-Mail adresses don't match. Please check.";
-      } else if (mailRepeat.length === 0) {
-        document.querySelector("#email-repeat").classList.add("error");
-        this.errorMailRepeatEmpty =
-          "Field can't be empty. Please re-enter your mail adress.";
+        this.checkMailRepeat = false;
       } else {
         document.querySelector("#email-repeat").classList.remove("error");
         this.errorMailRepeat = "";
+        this.checkMailRepeat = true;
       }
     },
     // submit Data
@@ -254,9 +262,9 @@ export default {
       this.phoneNumber = "";
       this.email = "";
       this.verifyEmail = "";
-      this.requestSuccess = true;
+      this.screenOut = true;
       setTimeout(() => {
-        this.requestSuccess = false;
+        this.screenOut = false;
         window.location.reload();
       }, 2500);
     },
@@ -265,9 +273,6 @@ export default {
 </script>
 
 <!-- todos
-- enable submit button function
-- verify email and other fields befor POST
-- set min max values for topic / description input
 - verify phonenumber cant be like 111111111111
  -->
 
@@ -421,23 +426,35 @@ form {
   align-items: center; */
 }
 
-button {
+#submit {
   width: 150px;
   height: auto;
   padding: 1rem;
   margin: 1rem;
   align-self: center;
   border: none;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 7px 12px rgba(0, 0, 0, 0.8);
+  background: rgba(100, 255, 100, 0.8);
   font-weight: 600;
   font-size: 20px;
   transition: 0.5s;
   border-radius: 5px;
 }
 
-button:hover {
-  background: rgba(100, 255, 100, 0.8);
+#submit:hover {
+  background: rgba(12, 124, 12, 0.8);
+  color: #fff;
   border-radius: 15px;
+}
+
+#submit:disabled {
+  color: #555;
+  background: #aaa;
+  box-shadow: none;
+}
+
+#submit:disabled:hover {
+  border-radius: 5px;
+  background: #aaa;
 }
 </style>
