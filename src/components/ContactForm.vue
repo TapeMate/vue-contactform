@@ -1,105 +1,78 @@
 <template>
+  <!-- <div v-if="this.requestSuccess === true" class="success-message"> -->
+  <div class="success-message">
+    <h2>Contact Request has been send successfully!</h2>
+    <i class="fa-solid fa-envelope-circle-check fa-bounce"></i>
+  </div>
   <div class="form-container">
     <form @submit="onSubmit">
-      <div class="input-control">
-        <label for="contact-topic">Topic</label>
+      <div class="input-control" style="width: 25%">
+        <label for="topic">Topic</label>
         <input
+          @keyup="toUpperCase"
           type="text"
           v-model="topic"
           name="topic"
-          id="contact-topic"
+          id="topic"
           placeholder="Type in your topic here"
         />
       </div>
       <div class="input-control">
-        <label for="contact-description">Description</label>
+        <label for="description">Description</label>
         <textarea
+          @keyup="toUpperCase"
           type="text"
           v-model="description"
           name="description"
-          id="contact-description"
+          id="description"
           placeholder="Type in your topic here"
         />
       </div>
-
-      <!-- <div class="input-container">
-          <div class="input-control">
-            <label for="firstName">First Name</label>
-            <input
-              type="text"
-              v-model="firstName"
-              name="firstName"
-              id="firstName"
-              placeholder="Enter first name"
-            />
-          </div>
-          <div class="input-control">
-            <label for="lastName">Last Name</label>
-            <input
-              type="text"
-              v-model="lastName"
-              name="lastName"
-              id="lastName"
-              placeholder="Enter last name"
-            />
-          </div>
-        </div>
-
-        <div class="input-container">
-          <div class="input-control">
-            <label for="streetNumber">Street & Number</label>
-            <input
-              type="text"
-              v-model="streetNumber"
-              name="streetNumber"
-              id="streetNumber"
-              placeholder="Enter your street and housenumber"
-            />
-          </div>
-          <div class="input-control">
-            <label for="zipCity">Zipcode & City</label>
-            <input
-              type="text"
-              v-model="zipCity"
-              name="zipCity"
-              id="zipCity"
-              placeholder="Enter your zip code and city"
-            />
-          </div>
-        </div> -->
 
       <div class="input-container">
         <div class="input-control">
           <label for="phone">Phone</label>
           <input
+            @keyup="validatePhoneNumber"
+            @focus="validatePhoneNumber"
             type="text"
-            v-model="phone"
+            v-model="phoneNumber"
             name="phone"
             id="phone"
             placeholder="Enter your phonenumber"
           />
+          <p class="phone-error" v-if="errorMessagePhone">
+            {{ errorMessagePhone }}
+          </p>
         </div>
-      </div>
-      <div class="input-container">
+
         <div class="input-control">
           <label for="email">E-mail Adress</label>
           <input
-            type="text"
+            @keyup="validateMailAdress"
+            type="email"
             v-model="email"
             name="email"
             id="email"
             placeholder="Enter your email adress"
           />
+          <p class="mail-error" v-if="errorMessageMail">
+            {{ errorMessageMail }}
+          </p>
         </div>
         <div class="input-control">
-          <label for="verifyEmail">E-mail Verification</label>
+          <label for="email-repeat">E-mail Verification</label>
           <input
-            type="text"
+            @keyup="verifyMailAdress"
+            type="email"
             v-model="verifyEmail"
-            name="verifyEmail"
-            id="verifyEmail"
+            name="email-repeat"
+            id="email-repeat"
             placeholder="Repeat your email adress"
           />
+          <p class="mail-repeat-error" v-if="errorMessageMailRepeat">
+            {{ errorMessageMailRepeat }}
+          </p>
         </div>
       </div>
       <button type="submit">Submit</button>
@@ -114,13 +87,14 @@ export default {
     return {
       topic: "",
       description: "",
-      // firstName: "",
-      // lastName: "",
-      // streetNumber: "",
-      // zipCity: "",
-      phone: "",
+      phoneNumber: "",
       email: "",
       verifyEmail: "",
+      // for input error & success handling
+      errorMessagePhone: "",
+      errorMessageMail: "",
+      errorMessageMailRepeat: "",
+      requestSuccess: false,
     };
   },
   methods: {
@@ -129,12 +103,9 @@ export default {
 
       const newContact = {
         topic: this.topic,
-        description: this.description,
-        // firstName: this.firstName,
-        // lastName: this.lastName,
-        // streetNumber: this.streetNumber,
-        // zipCity: this.zipCity,
-        phone: this.phone,
+        description:
+          this.description.charAt(0).toUpperCase() + this.description.slice(1),
+        phoneNumber: this.phoneNumber,
         email: this.email,
         verifyEmail: this.verifyEmail,
       };
@@ -145,39 +116,121 @@ export default {
       // resets input values.
       this.topic = "";
       this.description = "";
-      // this.firstName = "";
-      // this.lastName = "";
-      // this.streetNumber = "";
-      // this.zipCity = "";
-      this.phone = "";
+      this.phoneNumber = "";
       this.email = "";
       this.verifyEmail = "";
+    },
+
+    toUpperCase(e) {
+      const id = e.currentTarget.id;
+      const str = e.currentTarget.value;
+      const upperStr = str.charAt(0).toUpperCase() + str.slice(1);
+      document.querySelector(`#${id}`).value = upperStr;
+    },
+
+    validatePhoneNumber() {
+      const regex = /^(\+49|0)[\d\s-()]{8,}$/;
+      if (!regex.test(this.phoneNumber)) {
+        this.errorMessagePhone = "Please enter a valid phone number.";
+        document.querySelector("#phone").classList.add("error");
+      } else {
+        this.errorMessagePhone = "";
+        document.querySelector("#phone").classList.remove("error");
+      }
+    },
+
+    validateMailAdress() {
+      const regex = /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+      if (!regex.test(this.email)) {
+        this.errorMessageMail = "Please enter a valid E-Mail adress.";
+        document.querySelector("#email").classList.add("error");
+      } else {
+        this.errorMessageMail = "";
+        document.querySelector("#email").classList.remove("error");
+      }
+    },
+
+    verifyMailAdress() {
+      const mail = document.querySelector("#email").value;
+      const mailRepeat = document.querySelector("#email-repeat").value;
+      const mailRepeatStr = document.querySelector("#email-repeat");
+
+      mailRepeatStr.addEventListener("paste", (e) => e.preventDefault());
+
+      if (mail !== mailRepeat) {
+        this.errorMessageMailRepeat =
+          "Your E-Mail adresses don't match. Please check.";
+        document.querySelector("#email-repeat").classList.add("error");
+      } else {
+        this.errorMessageMailRepeat = "";
+        document.querySelector("#email-repeat").classList.remove("error");
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+.success-message {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  color: lime;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.success-message h2 {
+  width: 100%;
+  height: 25%;
+}
+.success-message i {
+  font-size: 100px;
+  margin-top: -900px;
+}
+.error {
+  background: #ffe3e3 !important;
+  color: rgb(165, 0, 0) !important;
+  outline: 2px solid red !important;
+}
+/* .success {
+} */
+.phone-error,
+.mail-error,
+.mail-repeat-error {
+  padding: 0.5rem;
+  font-size: 12px;
+  margin: 2px;
+  left: 65%;
+  background: #ffe3e3;
+  border: 1px solid;
+  color: rgb(255, 0, 0);
+}
+
 #phone {
   width: 20%;
 }
-.blackbody {
+/* .blackbody {
   background: rgba(0, 0, 0, 0.4);
   padding: 1rem;
-}
-.input-container .input-control:nth-child(1) {
+} */
+/* .input-container .input-control:nth-child(1) {
   margin-right: 15px;
-}
+} */
 .form-entry-info {
   background: rgba(255, 255, 255, 0.6);
   padding: 1rem 0;
   margin-bottom: 30px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
 }
-.form-entry-info p,
+/* .form-entry-info p,
 .form-entry-info h3 {
   padding: 1rem;
-}
+} */
 .form-container {
   /* width: 100%; */
   padding: 4% 10% 2%;
@@ -185,26 +238,31 @@ export default {
   background-size: cover;
 }
 .input-container {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 input,
 label {
-  width: 80%;
+  width: 100%;
   display: inline-block;
   padding: 0.5rem;
   margin: 3px;
 }
+input {
+  padding: 0.5rem 1rem;
+}
 
 textarea {
-  width: 80%;
+  width: 100%;
   height: 200px;
   display: inline-block;
   padding: 1rem;
-  margin: 1rem;
+  margin: 3px;
 }
 .input-container label {
-  text-align: right;
+  text-align: center;
   height: auto;
   max-width: max-content;
   min-width: 120px;
@@ -212,8 +270,19 @@ textarea {
 
 .input-container .input-control {
   display: flex;
+  justify-content: left;
   width: 100%;
 }
+
+.input-container .input-control:nth-child(2) {
+  margin-bottom: 0px !important;
+}
+
+.input-container .input-control label,
+.input-container .input-control input {
+  width: 20%;
+}
+
 .input-control {
   margin-bottom: 15px;
 }
@@ -229,7 +298,8 @@ label {
 input:focus,
 textarea:focus {
   /* outline: 3px solid #bb8b73; */
-  background: rgba(240, 255, 240, 0.95);
+  background: #bdfabd;
+  outline: 1px solid greenyellow;
 }
 
 label {
@@ -239,6 +309,8 @@ label {
 }
 
 form {
+  padding: 1rem;
+  background: #333;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

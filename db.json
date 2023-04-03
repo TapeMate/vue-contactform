@@ -31,30 +31,6 @@
       "email": "some@one.de",
       "verifyEmail": "some@one.de",
       "id": 4
-    },
-    {
-      "topic": "",
-      "description": "",
-      "phone": "",
-      "email": "",
-      "verifyEmail": "",
-      "id": 5
-    },
-    {
-      "topic": "",
-      "description": "",
-      "phone": "",
-      "email": "",
-      "verifyEmail": "",
-      "id": 6
-    },
-    {
-      "topic": "",
-      "description": "",
-      "phone": "",
-      "email": "",
-      "verifyEmail": "",
-      "id": 7
     }
   ]
 }
